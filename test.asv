@@ -1,0 +1,10 @@
+A = imread('2015/Databases/animal/7.jpg');
+
+C = mean( reshape( A, [], 3 ), 1 );
+
+for i = 1:5
+   
+    
+end
+
+
