@@ -1,6 +1,6 @@
 clear all
 
-A = imread('2015/ImageDatabase/imdbMEDIUM/162.jpg');
+A = imread('../2015/ImageDatabase/imdbMEDIUM/162.jpg');
 
 C = mean( reshape( A, [], 3 ), 1 );
 
