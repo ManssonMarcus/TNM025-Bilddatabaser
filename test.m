@@ -1,14 +1,14 @@
 clear all
 
-A = imread('../2015/ImageDatabase/imdbMEDIUM/162.jpg');
 
-C = mean( reshape( A, [], 3 ), 1 );
+ 
+kulerArray = [];
 
-imshow(A);
-
-for i = 1:5
-   
-    
+for i = 1:1000
+   img = imread( ['../2015/Databases/animal/' num2str(i) '.jpg']);
+   imgKuler = mean( reshape( img, [], 3 ), 1 );
+   kulerArray = [kulerArray ; imgKuler];
 end
 
 
+ 
