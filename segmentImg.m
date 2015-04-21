@@ -1,42 +1,73 @@
 
-bob = imread('BobMarley.jpg');
 
-bobY = size(bob,1);
+img = imread('BobMarley.jpg');
 
-bobX = size(bob,2);
+imgY = size(img,1);
 
+imgX = size(img,2);
 
-partKulerArray = [];
+cropDatabase = [];
 
-for i = 0:100:bobX
-   for j = 0:100:bobY
-      
-       part = imcrop(bob,[i j 100 100]);
+Red = [1 0 0 0 0 0 0];
+Orange = [0 1 0 0 0 0 0];
+Yellow = [0 0 1 0 0 0 0];
+Green = [0 0 0 1 0 0 0];
+Cyan = [0 0 0 0 1 0 0];
+Blue = [0 0 0 0 0 1 0];
+Magenta = [0 0 0 0 0 0 1];
+
+%partKulerArray = [];
+
+for i = 0:100:imgX
+    n = 0;
+   for j = 0:100:imgY
+       n = n+1;
+       cropPart = imcrop(img,[i j 100 100]);
            
-       partKuler = mean( reshape( part, [], 3 ), 1 );
+       %partKuler = mean( reshape( part, [], 3 ), 1 );
+       meanRGB = mean(reshape( cropPart, [], 3 ), 1 )./255;
+
+       hsv_values = mean_RGB2HSV(meanRGB);
+       picHue = hsv_values(1,1);
        
-       partKulerArray = [partKulerArray ; partKuler];
+       %Red
+       if(picHue >= 0 && picHue < (30) || picHue >= (320) && picHue <= (360))
+           
+           cropDatabase = [cropDatabase ; Red ];
+           %picDatabase(i,1) = 1;
+
+       %Orange
+       elseif(picHue >= (30) && picHue < (50))
+           cropDatabase = [cropDatabase ; Orange ];
+           %picDatabase(i,2) = 1;
+
+       %Yellow
+       elseif(picHue >= (50) && picHue < (70))
+           cropDatabase = [cropDatabase ; Yellow ];
+           %picDatabase(i,3) = 1;
+
+       %Green
+       elseif(picHue >= (70) && picHue < (160))
+           cropDatabase = [cropDatabase ; Green ];
+           %picDatabase(i,4) = 1;
+
+       %Cyan
+       elseif(picHue >= (160) && picHue < (190))
+           cropDatabase = [cropDatabase ; Cyan ];
+           %picDatabase(i,5) = 1;
+
+       %Blue
+       elseif(picHue >= (190) && picHue < (280))
+           cropDatabase = [cropDatabase ; Blue ];
+           %picDatabase(i,6) = 1;
+
+       %Magenta
+       else
+           cropDatabase = [cropDatabase ; Magenta ];
+           %picDatabase(i,7) = 1;
+
+       end
+   
    end
     
 end
-%{
-result2 = [];
-
-for k = 1:size(partKulerArray,1)
-    
-    tempPart = round(partKulerArray(k,1)) + round(partKulerArray(k,2))+round(partKulerArray(k,3));
-    
-    for m =1:1000
-       partKuler = round(kulerArray(m,1))+ round(kulerArray(m,2))+round(kulerArray(m,3));
-       if -30 < partKuler - tempPart < 30
-            img = imread( ['../2015/Databases/animal/' num2str(m) '.jpg']);
-            img = imresize(img, [100 100])
-            result = [result  img];
-            break;
-       end 
-       partKuler = 0;
-    end
-    result2 = [result2 ; result];
-    tempPart = 0;
-end
-}%
