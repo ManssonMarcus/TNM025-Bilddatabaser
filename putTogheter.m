@@ -1,22 +1,24 @@
 
 lineImg = [];
 resultImg = [];
-imgSize = 10;
-simVec = zeros(size(picDatabase(:,1)));
-difVec = ones(size(picDatabase(:,1)))* 300;
+imgSize = cropSize;
+%simVec = zeros(size(picDatabase(:,1)));
+difVec = ones(size(picDatabase(:,1)))* 500;
+imgDatabase = picDatabase;
+
+%Weights for classifications (larger value = less important)
+colorWeight= 1;
+satWeight = 1;
+valWeight = 1;
 
 for i = 1:size(cropDatabase, 1)
-    
-    
-    %RIGHT NOW IT SEEMS LIKE IT DOESENT GET DIFFERENT MINIMUM
-    %INDEX...WIERD!
-    
-    
+   
     %Loop through all images in database
-    for j = 1:size(picDatabase,1) 
+    for j = 1:size(imgDatabase,1) 
         %calculate difference in crop and image values
-        difference = abs( cropDatabase(i,:) - picDatabase(j,:) );
-        totalDif = abs(sum(difference));
+        difference = abs( cropDatabase(i,:) - imgDatabase(j,:));
+        
+        totalDif = difference(1) * colorWeight + difference(2) * satWeight + difference(3) * valWeight;
         difVec(j) = totalDif; 
         
         %Check similarity between the cropped image and the images in the database
@@ -27,16 +29,17 @@ for i = 1:size(cropDatabase, 1)
     %Take the the index of the image that has highest similarity
     %[M,index] = max(simVec(:));    
     
-    [M,index] = min(difVec);  
+    [M,index] = min(difVec); 
     filename = contents(index).name;
     [path, name] = fileparts(filename);
+    imgDatabase(index,:) = NaN;
     imgPath = strcat('TestBasen','\',filename);
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);
     lineImg = [lineImg img];
     
     %if the size of lineImg reaches Original width, start new row
-   if size(lineImg,2)== 1600
+   if size(lineImg,2)== imgX
       resultImg = [resultImg ; lineImg];
       lineImg =[];
    end    

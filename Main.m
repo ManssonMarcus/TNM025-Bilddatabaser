@@ -1,4 +1,3 @@
-clear all
 
 contents = dir('TestBasen/*.jpg'); % location of database
 
@@ -10,6 +9,13 @@ for i = 1:numel(contents)
   [path, name] = fileparts(filename);
   imgPath = strcat('TestBasen','\',filename);
   img = imread(imgPath);
+  
+  if(ndims(img) < 3)
+      img = repmat(img,[1 1 3]);
+      img = cat(3,img,img,img);
+  end
+    
+  
   
   %Color classification
   colorRow = ColorClassification(img);
