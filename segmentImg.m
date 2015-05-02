@@ -1,9 +1,9 @@
 
-img = imread('BobMarley.jpg');
+img = imread('barack.jpg');
 imgY = size(img,1);
 imgX = size(img,2);
 cropDatabase = [];
-cropSize = 20;
+cropSize = 50;
 
 Rx = rem(imgX, cropSize);
 Ry = rem(imgY, cropSize);

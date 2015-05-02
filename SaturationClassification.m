@@ -13,25 +13,6 @@ function [ saturationRow ] = SaturationClassification( img )
     %Test for "match diff"
     saturationRow = picSat * 255;
   
-%    
-%     %Create  value bins (5) , from saturated to not saturated
-%     
-%    if(picSat >= 0 && picSat < 51 )
-%        saturationRow(1) = 1;
-% 
-%    elseif (picSat >= 51 && picSat < 102 )
-%        saturationRow(2) = 1;
-% 
-%    elseif(picSat >= 102 && picSat < 153 )
-%        saturationRow(3) = 1;
-%        
-%    elseif(picSat >= 153 && picSat <  204 )
-%       saturationRow(4) = 1;
-%       
-%    else
-%       saturationRow(5) = 1;
-%  
-%    end
 
 end
 

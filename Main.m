@@ -15,8 +15,7 @@ for i = 1:numel(contents)
       img = cat(3,img,img,img);
   end
     
-  
-  
+ 
   %Color classification
   colorRow = ColorClassification(img);
   
