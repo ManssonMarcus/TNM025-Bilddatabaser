@@ -1,8 +1,8 @@
 
 lineImg = [];
 resultImg = [];
-imgSize = 10;
-simVec = zeros(size(picDatabase(:,1)));
+imgSize = 25;
+%simVec = zeros(size(picDatabase(:,1)));
 difVec = ones(size(picDatabase(:,1)))* 300;
 
 for i = 1:size(cropDatabase, 1)
@@ -15,8 +15,9 @@ for i = 1:size(cropDatabase, 1)
     %Loop through all images in database
     for j = 1:size(picDatabase,1) 
         %calculate difference in crop and image values
-        difference = abs( cropDatabase(i,:) - picDatabase(j,:) );
-        totalDif = abs(sum(difference));
+        
+        difference = [abs( cropDatabase(i,1) - picDatabase(j,1) ) abs( cropDatabase(i,2) - picDatabase(j,2) ) abs( cropDatabase(i,3) - picDatabase(j,3))];
+        totalDif = abs(difference(1)+difference(2)+difference(3));
         difVec(j) = totalDif; 
         
         %Check similarity between the cropped image and the images in the database
@@ -26,11 +27,16 @@ for i = 1:size(cropDatabase, 1)
     
     %Take the the index of the image that has highest similarity
     %[M,index] = max(simVec(:));    
+ 
+    [M,index] = min(difVec); 
     
-    [M,index] = min(difVec);  
+    picDatabase(index,1) = picDatabase(index,1) + 100;
+    picDatabase(index,2) = picDatabase(index,2) + 100;
+    picDatabase(index,3) = picDatabase(index,3) + 100;
+    
     filename = contents(index).name;
     [path, name] = fileparts(filename);
-    imgPath = strcat('TestBasen','\',filename);
+    imgPath = strcat('../2015/Databases/cat/','\',filename);
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);
     lineImg = [lineImg img];
@@ -40,7 +46,7 @@ for i = 1:size(cropDatabase, 1)
       resultImg = [resultImg ; lineImg];
       lineImg =[];
    end    
-
+   
 end    
 
 

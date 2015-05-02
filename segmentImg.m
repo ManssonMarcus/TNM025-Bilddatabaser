@@ -3,7 +3,7 @@ img = imread('BobMarley.jpg');
 imgY = size(img,1);
 imgX = size(img,2);
 cropDatabase = [];
-cropSize = 10;
+cropSize = 25;
 
 for i = 0:cropSize:imgY-cropSize
  
