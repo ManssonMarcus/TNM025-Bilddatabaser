@@ -1,0 +1,4 @@
+- Slumpmässigt analysera crops (Så att bilden inte blir sämre ju längre ner i bilden man är)
+- Någon form av normalfördelning när man räknar ut bidraget i binsen (för alla klassifikationer med bins)
+- Lägga till fler klassifikationer till exempel medelvärden + bins
+- Avgöra hur svartvita bilder ska klassificeras (har just nu knasig fördelning för färg och saturering)

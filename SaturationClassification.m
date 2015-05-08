@@ -23,13 +23,13 @@ function [ satBin ] = SaturationClassification( img )
     satBin = satBin * 100;
     
     %MEAN SATURATION CLASSIFICATION(return picSat)
-    %meanRGB = mean(mean(img));
- 
-    %hsv_values = mean_RGB2HSV(meanRGB);
-    %picSat = hsv_values(2);
+%     meanRGB = mean(mean(img));
+%  
+%     hsv_values = mean_RGB2HSV(meanRGB);
+%     picSat = hsv_values(2);
     
     %Test for "match diff"
-    %picSat = picSat * 100;
+%     picSat = picSat * 100;
   
 
 end
