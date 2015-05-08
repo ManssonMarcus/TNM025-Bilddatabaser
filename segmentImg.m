@@ -3,7 +3,7 @@ img = imread('barack.jpg');
 imgY = size(img,1);
 imgX = size(img,2);
 cropDatabase = [];
-cropSize = 50;
+cropSize = 45;
 
 Rx = rem(imgX, cropSize);
 Ry = rem(imgY, cropSize);

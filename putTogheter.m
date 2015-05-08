@@ -15,6 +15,7 @@ for i = 1:size(cropDatabase, 1)
    
     %Loop through all images in database
     for j = 1:size(imgDatabase,1) 
+        
         %calculate difference in crop and image values
         difference = abs( cropDatabase(i,:) - imgDatabase(j,:));
         
@@ -39,9 +40,18 @@ for i = 1:size(cropDatabase, 1)
     %Make sure we dont reapeat an image
     imgDatabase(index,:) = NaN;
     
-    imgPath = strcat('TestBasen','\',filename);
+    %imgPath = strcat('TestBasen','\',filename);
+    
+    imgPath = strcat('../Databases/andy_warhol','\',filename);
+    
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);
+    
+    
+    if(ndims(img) < 3)
+      img = cat(3,img,img,img);
+    end
+  
     lineImg = [lineImg img];
     
     %if the size of lineImg reaches Original width, start new row
