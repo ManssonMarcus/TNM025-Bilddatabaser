@@ -21,7 +21,7 @@ for i = 0:cropSize:imgY-cropSize
   
       dataRow = [colorRow saturationRow brightnessRow ];
 
-      cropDatabase = [cropDatabase ; dataRow ];
+      cropDatabase = [cropDatabase ; dataRow];
  
    end
     

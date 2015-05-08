@@ -30,7 +30,15 @@ for i = 1:size(cropDatabase, 1)
     [M,index] = min(difVec);  
     filename = contents(index).name;
     [path, name] = fileparts(filename);
-    imgPath = strcat('TestBasen','\',filename);
+    
+    %Make sure we dont reapeat an image
+    imgDatabase(index,:) = NaN;
+    
+    %imgPath = strcat('TestBasen','\',filename);
+    
+    imgPath = strcat('../2015/Databases/andy_warhol','\',filename);
+    
+
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);
     lineImg = [lineImg img];
