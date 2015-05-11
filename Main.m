@@ -3,7 +3,6 @@ clear all
 %contents = dir('TestBasen/*.jpg'); % location of database
 contents = dir('../2015/Databases/andy_warhol/*.jpg'); % <---innerhåller märkliga bilder med 9 kanaler....!!
 
-
 picDatabase = [];
 
 for i = 1:numel(contents)
@@ -17,6 +16,10 @@ for i = 1:numel(contents)
   img = imread(imgPath);
   img_2 = imread(imgPath);
   
+  if(ndims(img) < 3)
+      img = cat(3,img,img,img);
+  end
+
   %Color classification
   colorRow = ColorClassification(img, img_2);
   
@@ -27,7 +30,6 @@ for i = 1:numel(contents)
   brightnessRow =  BrightnessClassification(img);
   
   dataRow = [colorRow saturationRow brightnessRow];
-  
   
   picDatabase = [picDatabase; dataRow];
   

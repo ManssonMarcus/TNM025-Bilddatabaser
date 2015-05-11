@@ -19,7 +19,7 @@ function [ satBin ] = SaturationClassification( img, img_2 )
     img = rgb2hsv(img); % <--- This may be done before this function is called
     satBin = zeros(1,10);
 
-    if(ndims(img_2) == 3)
+    %if(ndims(img_2) == 3)
         satBin(1) = sum(sum(0.1 >= img(:,:,2)))/imgSize;
         satBin(2) = sum(sum(0.2 >= img(:,:,2) & img(:,:,2) > 0.1))/imgSize;
         satBin(3) = sum(sum(0.3 >= img(:,:,2) & img(:,:,2) > 0.2))/imgSize;
@@ -33,22 +33,20 @@ function [ satBin ] = SaturationClassification( img, img_2 )
 
         satBin = satBin * 100;
 
-    else
-       for i = 1:10
-            satBin(i) = 10;
-       end
-    end
-
-    satBin = satBin * 100;
+%     else
+%        for i = 1:10
+%             satBin(i) = 10;
+%        end
+%     end
     
     %MEAN SATURATION CLASSIFICATION(return picSat)
 %     meanRGB = mean(mean(img));
 %  
 %     hsv_values = mean_RGB2HSV(meanRGB);
 %     picSat = hsv_values(2);
-
     
     %Test for "match diff"
+
     saturationRow = picSat * 255;
   
 %    

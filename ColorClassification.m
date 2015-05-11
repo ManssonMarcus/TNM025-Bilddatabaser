@@ -12,7 +12,7 @@ function [ colorBin ] = ColorClassification( img, img_2 )
     img = rgb2hsv(img); % <--- This may be done before this function is called
     colorBin = zeros(1,11);
 
-    if(ndims(img_2) == 3)
+    %if(ndims(img_2) == 3)
         colorBin(1) =  sum(sum(0.083  >= img(:,:,1) | img(:,:,1) > 0.9167))/imgSize;
         colorBin(2) =  sum(sum(0.1250 >= img(:,:,1) &  img(:,:,1) > 0.083 ))/imgSize;
         colorBin(3) =  sum(sum(0.2083 >= img(:,:,1) &  img(:,:,1) > 0.1250))/imgSize;
@@ -40,19 +40,17 @@ function [ colorBin ] = ColorClassification( img, img_2 )
 
         colorBin = colorBin * 100;
    
-    else
-        for i = 1:11
-            colorBin(i) = 10;
-        end
-    end
+%     else
+%         for i = 1:11
+%             colorBin(i) = 10;
+%         end
+%     end
 
->>>>>>> Stashed changes
     %colorRow = zeros(1,7);
     
     meanRGB = mean(mean(img))./ 255;
     
-    
-
+   
     hsv_values = mean_RGB2HSV(meanRGB);
     picHue = hsv_values(1);
     

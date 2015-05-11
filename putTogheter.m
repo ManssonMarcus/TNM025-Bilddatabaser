@@ -1,7 +1,7 @@
 
 lineImg = [];
 resultImg = [];
-imgSize = 10;
+imgSize = cropSize;
 simVec = zeros(size(picDatabase(:,1)));
 difVec = ones(size(picDatabase(:,1)))* 300;
 
@@ -37,14 +37,18 @@ for i = 1:size(cropDatabase, 1)
     %imgPath = strcat('TestBasen','\',filename);
     
     imgPath = strcat('../2015/Databases/andy_warhol','\',filename);
-    
 
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);
+    
+    if(ndims(img) < 3)
+      img = cat(3,img,img,img);
+    end
+    
     lineImg = [lineImg img];
     
     %if the size of lineImg reaches Original width, start new row
-   if size(lineImg,2)== 1600
+   if size(lineImg,2) == imgX
       resultImg = [resultImg ; lineImg];
       lineImg =[];
    end    
