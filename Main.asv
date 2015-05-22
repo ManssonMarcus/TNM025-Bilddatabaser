@@ -1,6 +1,6 @@
 
 %contents = dir('TestBasen/*.jpg'); % location of database
-contents = dir('../Databases/andy_warhol/*.jpg'); % <---innerhåller märkliga bilder med 9 kanaler....!!
+contents = dir('../Databases/Beach*.jpg');
 
 picDatabase = [];
 
@@ -10,13 +10,12 @@ for i = 1:numel(contents)
   [path, name] = fileparts(filename);
   %imgPath = strcat('TestBasen','\',filename);
   
-  imgPath = strcat('../Databases/andy_warhol','\',filename);
+  imgPath = strcat('../Databases/ImageDatabase/imdbMEDIUM/','\',filename);
   
-  img1 = imread(imgPath);
+  
   img = imread(imgPath);
   
-  if(ismatrix(img))
-      img = repmat(img,[1 1 3]);
+  if(ndims(img) < 3)
       img = cat(3,img,img,img);
   end
     

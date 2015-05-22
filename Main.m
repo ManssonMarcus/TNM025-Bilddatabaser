@@ -1,6 +1,6 @@
 
 %contents = dir('TestBasen/*.jpg'); % location of database
-contents = dir('../Databases/cat/*.jpg'); % <---innerhåller märkliga bilder med 9 kanaler....!!
+contents = dir('../Databases/Beach/*.jpg');
 
 picDatabase = [];
 
@@ -10,7 +10,7 @@ for i = 1:numel(contents)
   [path, name] = fileparts(filename);
   %imgPath = strcat('TestBasen','\',filename);
   
-  imgPath = strcat('../Databases/cat','\',filename);
+  imgPath = strcat('../Databases/Beach/','\',filename);
   
   
   img = imread(imgPath);

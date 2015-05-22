@@ -42,7 +42,7 @@ for i = 1:size(cropDatabase, 1)
     
     %imgPath = strcat('TestBasen','\',filename);
     
-    imgPath = strcat('../Databases/cat','\',filename);
+    imgPath = strcat('../Databases/Beach/','\',filename);
     
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);

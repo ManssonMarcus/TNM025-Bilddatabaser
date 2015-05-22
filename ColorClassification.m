@@ -28,10 +28,12 @@ function [ colorBin ] = ColorClassification( img )
     %colorRow = zeros(1,7);
     
     
-    %MEAN COLOR CLASSIFICATION (return picHue)
-     %meanRGB = mean(mean(img))./ 255;
+    %MEAN COLOR CLASSIFICATION
+    %meanRGB = mean(mean(img))./ 255;
     
     %hsv_values = mean_RGB2HSV(meanRGB);
+    %Put meanvalue in last bin
+    %colorBin(12) = hsv_values(1); 
     %picHue = hsv_values(1);
    
 
