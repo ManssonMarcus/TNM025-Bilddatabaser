@@ -1,5 +1,6 @@
 
 img = imread('barack.jpg');
+
 imgY = size(img,1);
 imgX = size(img,2);
 cropDatabase = [];
@@ -40,7 +41,6 @@ for i = 0:cropSize:imgY-cropSize
 
       cropDatabase = [cropDatabase ; dataRow i j];
       
-
    end
     
 end

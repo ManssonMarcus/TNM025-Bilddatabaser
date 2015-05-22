@@ -11,8 +11,7 @@ function [ colorBin ] = ColorClassification( img, img_2 )
     img = rgb2hsv(img); % <--- This may be done before this function is called
     colorBin = zeros(1,11);
 
-
-    %if(ndims(img_2) == 3)
+    if(ndims(img_2) == 3)
         colorBin(1) =  sum(sum(0.083  >= img(:,:,1) | img(:,:,1) > 0.9167))/imgSize;
         colorBin(2) =  sum(sum(0.1250 >= img(:,:,1) &  img(:,:,1) > 0.083 ))/imgSize;
         colorBin(3) =  sum(sum(0.2083 >= img(:,:,1) &  img(:,:,1) > 0.1250))/imgSize;
@@ -24,7 +23,6 @@ function [ colorBin ] = ColorClassification( img, img_2 )
         colorBin(9) =  sum(sum(0.7917 >= img(:,:,1) &  img(:,:,1) > 0.75  ))/imgSize;
         colorBin(10) = sum(sum(0.875  >= img(:,:,1) &  img(:,:,1) > 0.7917))/imgSize;
         colorBin(11) = sum(sum(0.9167 >= img(:,:,1) &  img(:,:,1) > 0.875 ))/imgSize;
-
 
         %Normalfördela färger
         colorBin(1) = colorBin(1) + colorBin(2)*0.5 + colorBin(11)*0.5;
@@ -38,23 +36,22 @@ function [ colorBin ] = ColorClassification( img, img_2 )
         colorBin(9) = colorBin(9) + colorBin(10)*0.5 + colorBin(8)*0.5;
         colorBin(10) = colorBin(10) + colorBin(11)*0.5 + colorBin(9)*0.5;
         colorBin(11) = colorBin(11) + colorBin(1)*0.5 + colorBin(10)*0.5;
-        
-    colorBin = colorBin * 100;
 
+        colorBin = colorBin * 100;
    
-%     else
-%         for i = 1:11
-%             colorBin(i) = 10;
-%         end
-%     end
-  
+    else
+
+    for i = 1:11
+            colorBin(i) = 10;
+    end
+
+    %colorRow = zeros(1,7);
     
-    %MEAN COLOR CLASSIFICATION
-    %meanRGB = mean(mean(img))./ 255;
+    
+    %MEAN COLOR CLASSIFICATION (return picHue)
+     %meanRGB = mean(mean(img))./ 255;
     
     %hsv_values = mean_RGB2HSV(meanRGB);
-    %Put meanvalue in last bin
-    %colorBin(12) = hsv_values(1); 
     %picHue = hsv_values(1);
    
 

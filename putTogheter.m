@@ -1,9 +1,12 @@
 
 imgSize = cropSize;
 
+
 %Grundbildens storlek i 0:or
 imgResult =(label2rgb(zeros(imgY,imgX)));
 
+
+%simVec = zeros(size(picDatabase(:,1)));
 difVec = ones(size(picDatabase(:,1)))* 500;
 imgDatabase = picDatabase;
 
@@ -11,6 +14,7 @@ imgDatabase = picDatabase;
 colorWeight = 1;
 satWeight = 1;
 valWeight = 1;
+
 %For loadingtime
 wait= 1;
 
@@ -23,6 +27,7 @@ for i =  randperm(size(cropDatabase, 1))
     %place to put the images
     putX = int64(cropDatabase(i,size(cropDatabase(1,:),2)-1));
     putY = int64(cropDatabase(i,size(cropDatabase(1,:),2)));
+   
     %Loop through all images in database
     for j = 1:size(imgDatabase,1) 
         
@@ -52,10 +57,9 @@ for i =  randperm(size(cropDatabase, 1))
     if(ndims(img) < 3)
       img = cat(3,img,img,img);
     end
-    
+
     %Place images on the correct place
     imgResult((putX+1):(putX+cropSize),(putY+1):(putY+cropSize),:)=img;
-    
 
 end    
 imshow(imgResult);

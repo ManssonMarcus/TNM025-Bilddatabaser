@@ -8,7 +8,7 @@ function [ valBin ] = BrightnessClassification( img )
   
     %BINS FOR BRIGHTNESS CLASSIFICATION
     img = rgb2hsv(img);
-    valBin = zeros(1,10);
+    valBin = zeros(1,11);
     valBin(1) = sum(sum(0.1 >= img(:,:,3)))/imgSize;
     valBin(2) = sum(sum(0.2 >= img(:,:,3) & img(:,:,3) > 0.1))/imgSize;
     valBin(3) = sum(sum(0.3 >= img(:,:,3) & img(:,:,3) > 0.2))/imgSize;
@@ -23,12 +23,14 @@ function [ valBin ] = BrightnessClassification( img )
     
     valBin = valBin * 100;
  
-    %MEAN BRIGHTNESS CLASSIFICATION(return picVal)
-    %brightnessRow = zeros(1,5);
+    %MEAN BRIGHTNESS CLASSIFICATION
+    brightnessRow = zeros(1,5);
     
-    %meanRGB = mean(mean(img));
+    meanRGB = mean(mean(img));
  
-    %hsv_values = mean_RGB2HSV(meanRGB);
+    hsv_values = mean_RGB2HSV(meanRGB);
+    %Put mean value in last bin
+    valBin(11) = hsv_values(3);
     %picVal = hsv_values(3);
   
 
