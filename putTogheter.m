@@ -1,8 +1,9 @@
 
-lineImg = [];
-resultImg = [];
 imgSize = cropSize;
-%simVec = zeros(size(picDatabase(:,1)));
+
+%Grundbildens storlek i 0:or
+imgResult =(label2rgb(zeros(imgY,imgX)));
+
 difVec = ones(size(picDatabase(:,1)))* 500;
 imgDatabase = picDatabase;
 
@@ -10,28 +11,30 @@ imgDatabase = picDatabase;
 colorWeight = 1;
 satWeight = 1;
 valWeight = 1;
+%For loadingtime
+wait= 1;
 
-for i = 1:size(cropDatabase, 1)
-   
+for i =  randperm(size(cropDatabase, 1)) 
+    
+    %Progress of loadingtime-ish
+    wait = wait+1;
+    waitbar(wait/(size(cropDatabase, 1)));
+    
+    %place to put the images
+    putX = int64(cropDatabase(i,size(cropDatabase(1,:),2)-1));
+    putY = int64(cropDatabase(i,size(cropDatabase(1,:),2)));
     %Loop through all images in database
     for j = 1:size(imgDatabase,1) 
         
         %calculate difference in crop and image values
-        difference = abs( cropDatabase(i,:) - imgDatabase(j,:));
-        
-        %Weight the different parts of the difference
-        %totalDif = difference(1) * colorWeight + difference(2) * satWeight + difference(3) * valWeight;
+        difference = abs( cropDatabase(i,1:size(cropDatabase(1,:),2)-2) - imgDatabase(j,:));
         
         totalDif = sum(difference);
         difVec(j) = totalDif; 
-        
-        %Check similarity between the cropped image and the images in the database
-        %similarity = dot(cropDatabase(i,:),picDatabase(j,:));
-        %simVec(j) = similarity;          
+                 
     end
     
-    %Take the the index of the image that has highest similarity
-    %[M,index] = max(simVec(:));    
+    %Take the the index of the image that has highest similarity    
     
     [M,index] = min(difVec); 
     filename = contents(index).name;
@@ -40,9 +43,7 @@ for i = 1:size(cropDatabase, 1)
     %Make sure we dont reapeat an image
     imgDatabase(index,:) = NaN;
     
-    %imgPath = strcat('TestBasen','\',filename);
-    
-    imgPath = strcat('../Databases/cat','\',filename);
+    imgPath = strcat('../2015/Databases/colorful/','\',filename);
     
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);
@@ -51,16 +52,10 @@ for i = 1:size(cropDatabase, 1)
     if(ndims(img) < 3)
       img = cat(3,img,img,img);
     end
-  
-    lineImg = [lineImg img];
     
-    %if the size of lineImg reaches Original width, start new row
-   if size(lineImg,2)== imgX
-      resultImg = [resultImg ; lineImg];
-      lineImg =[];
-   end    
+    %Place images on the correct place
+    imgResult((putX+1):(putX+cropSize),(putY+1):(putY+cropSize),:)=img;
+    
 
 end    
-
-
-imshow(resultImg);
+imshow(imgResult);

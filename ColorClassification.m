@@ -22,6 +22,19 @@ function [ colorBin ] = ColorClassification( img )
     colorBin(10) = sum(sum(0.875  >= img(:,:,1) &  img(:,:,1) > 0.7917))/imgSize;
     colorBin(11) = sum(sum(0.9167 >= img(:,:,1) &  img(:,:,1) > 0.875 ))/imgSize;
     
+        %Normalfördela färger
+        colorBin(1) = colorBin(1) + colorBin(2)*0.5 + colorBin(11)*0.5;
+        colorBin(2) = colorBin(2) + colorBin(3)*0.5 + colorBin(1)*0.5;
+        colorBin(3) = colorBin(3) + colorBin(4)*0.5 + colorBin(2)*0.5;
+        colorBin(4) = colorBin(4) + colorBin(5)*0.5 + colorBin(3)*0.5;
+        colorBin(5) = colorBin(5) + colorBin(6)*0.5 + colorBin(4)*0.5;
+        colorBin(6) = colorBin(6) + colorBin(7)*0.5 + colorBin(5)*0.5;
+        colorBin(7) = colorBin(7) + colorBin(8)*0.5 + colorBin(6)*0.5;
+        colorBin(8) = colorBin(8) + colorBin(9)*0.5 + colorBin(7)*0.5;
+        colorBin(9) = colorBin(9) + colorBin(10)*0.5 + colorBin(8)*0.5;
+        colorBin(10) = colorBin(10) + colorBin(11)*0.5 + colorBin(9)*0.5;
+        colorBin(11) = colorBin(11) + colorBin(1)*0.5 + colorBin(10)*0.5;
+    
     
     colorBin = colorBin * 100;
    
