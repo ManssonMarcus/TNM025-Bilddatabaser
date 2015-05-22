@@ -12,25 +12,23 @@ for i = 1:numel(contents)
   
   imgPath = strcat('../Databases/Beach/','\',filename);
   
-  
   img = imread(imgPath);
+  img_2 = imread(imgPath);
   
   if(ndims(img) < 3)
       img = cat(3,img,img,img);
   end
-    
- 
+
   %Color classification
-  colorRow = ColorClassification(img);
+  colorRow = ColorClassification(img, img_2);
   
   %Saturation classification
-  saturationRow = SaturationClassification(img);
+  saturationRow = SaturationClassification(img, img_2);
 
   %Brightness classification
   brightnessRow =  BrightnessClassification(img);
   
-  dataRow = [colorRow saturationRow brightnessRow ];
-  
+  dataRow = [colorRow saturationRow brightnessRow];
   
   picDatabase = [picDatabase; dataRow];
   

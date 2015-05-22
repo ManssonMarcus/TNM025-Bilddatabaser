@@ -2,16 +2,14 @@
 lineImg = [];
 resultImg = [];
 imgSize = cropSize;
-
 %simVec = zeros(size(picDatabase(:,1)));
 difVec = ones(size(picDatabase(:,1)))* 500;
 imgDatabase = picDatabase;
 
 %Weights for classifications (larger value = less important)
-colorWeight = 1;
-satWeight = 1;
-valWeight = 1;
-
+%colorWeight = 1;
+%satWeight = 1;
+%valWeight = 1;
 
 for i = 1:size(cropDatabase, 1)
    
@@ -44,7 +42,7 @@ for i = 1:size(cropDatabase, 1)
     
     %imgPath = strcat('TestBasen','\',filename);
     
-    imgPath = strcat('../Databases/Beach/','\',filename);
+    imgPath = strcat('../2015/Databases/andy_warhol','\',filename);
     
     img = imread(imgPath);
     img = imresize(img, [imgSize imgSize]);
@@ -57,7 +55,7 @@ for i = 1:size(cropDatabase, 1)
     lineImg = [lineImg img];
     
     %if the size of lineImg reaches Original width, start new row
-   if (size(lineImg,2)== imgX)
+   if size(lineImg,2)== imgX
       resultImg = [resultImg ; lineImg];
       lineImg =[];
    end    
